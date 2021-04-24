@@ -34,9 +34,13 @@ server.get(`/`, async (request, reply) => {
     .send(request.cookies)
 })
 
-server.get(`/page`, async (_, reply) => {
-  const testUrl = `https://seob-test-cookies.herokuapp.com/`
+server.get(`/redirect`, async (_, reply) => {
+  return reply.redirect(302, testUrl)
+})
 
+const testUrl = `https://seob-test-cookies.herokuapp.com/`
+
+server.get(`/page`, async (_, reply) => {
   return reply.header(`Content-Type`, `text/html`).send(`
     <a href="${testUrl}">Link Click</a>
     <form method="get" action="${testUrl}">
@@ -48,6 +52,7 @@ server.get(`/page`, async (_, reply) => {
       }
     </script>
     <button onclick="pushLocation()">Location href</button>
+    <a href="/redirect"">Redirect (302)</a>
   `)
 })
 
