@@ -53,6 +53,15 @@ server.get(`/page`, async (_, reply) => {
     </script>
     <button onclick="pushLocation()">Location href</button>
     <a href="/redirect"">Redirect (302)</a>
+    <script>
+      function requestXHR() {
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', '${testUrl}', true);
+        xhr.withCredentials = true;
+        xhr.send();
+      }
+    </script>
+    <button onclick="requestXHR()">XHR Request</button>
   `)
 })
 
