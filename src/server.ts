@@ -18,7 +18,7 @@ server.get(`/`, async (request, reply) => {
 
 const start = async () => {
   try {
-    await server.listen(process.env.port ?? 80)
+    await server.listen(process.env.PORT ?? 3000)
   } catch (err) {
     server.log.error(err)
     process.exit(1)
