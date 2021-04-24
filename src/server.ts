@@ -12,8 +12,25 @@ server.get(`/`, async (request, reply) => {
     .setCookie(`secure`, `yes`, { secure: true })
     .setCookie(`same-site-strict`, `yes`, { sameSite: `strict` })
     .setCookie(`same-site-lax`, `yes`, { sameSite: `lax` })
-    .setCookie(`same-site-none`, `yes`, { sameSite: `none` })
+    .setCookie(`same-site-none`, `yes`, { sameSite: `none`, secure: true })
     .send(request.cookies)
+})
+
+server.get(`/page`, async (_, reply) => {
+  const testUrl = `https://seob-test-cookies.herokuapp.com/`
+
+  return reply.header(`Content-Type`, `text/html`).send(`
+    <a href="${testUrl}">Link Click</a>
+    <form method="get" action="${testUrl}">
+      <button type="submit">Form Submit</button>
+    </form>
+    <script>
+      function pushLocation() {
+        window.location.href = '${testUrl}';
+      }
+    </script>
+    <button onclick="pushLocation()">Location href</button>
+  `)
 })
 
 const start = async () => {
