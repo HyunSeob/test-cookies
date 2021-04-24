@@ -10,9 +10,27 @@ server.get(`/`, async (request, reply) => {
     .setCookie(`normal`, `yes`)
     .setCookie(`http-only`, `yes`, { httpOnly: true })
     .setCookie(`secure`, `yes`, { secure: true })
-    .setCookie(`same-site-strict`, `yes`, { sameSite: `strict` })
-    .setCookie(`same-site-lax`, `yes`, { sameSite: `lax` })
-    .setCookie(`same-site-none`, `yes`, { sameSite: `none`, secure: true })
+    .setCookie(`same-site-strict (secure)`, `yes`, {
+      sameSite: `strict`,
+      secure: true,
+    })
+    .setCookie(`same-site-lax (secure)`, `yes`, {
+      sameSite: `lax`,
+      secure: true,
+    })
+    .setCookie(`same-site-none (secure)`, `yes`, {
+      sameSite: `none`,
+      secure: true,
+    })
+    .setCookie(`same-site-strict (non-secure)`, `yes`, {
+      sameSite: `strict`,
+    })
+    .setCookie(`same-site-lax (non-secure)`, `yes`, {
+      sameSite: `lax`,
+    })
+    .setCookie(`same-site-none (non-secure)`, `yes`, {
+      sameSite: `none`,
+    })
     .send(request.cookies)
 })
 
@@ -30,6 +48,12 @@ server.get(`/page`, async (_, reply) => {
       }
     </script>
     <button onclick="pushLocation()">Location href</button>
+  `)
+})
+
+server.get(`/iframe`, async (_, reply) => {
+  return reply.header(`Content-Type`, `text/html`).send(`
+    <iframe src="/page" width="1280px" height="1024px"></iframe>
   `)
 })
 
