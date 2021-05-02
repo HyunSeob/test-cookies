@@ -34,21 +34,30 @@ server.get(`/`, async (request, reply) => {
     .send(request.cookies)
 })
 
-server.get(`/redirect`, async (_, reply) => {
-  return reply.redirect(302, testUrl)
+server.post(`/`, async (request, reply) => {
+  return reply.send(request.cookies)
 })
 
 const testUrl = `https://seob-test-cookies.herokuapp.com/`
+
+server.get(`/redirect`, async (_, reply) => {
+  return reply.redirect(302, testUrl)
+})
 
 server.get(`/page`, async (_, reply) => {
   return reply.header(`Content-Type`, `text/html`).send(`
     <a href="${testUrl}">Link Click</a>
     <form method="get" action="${testUrl}">
-      <button type="submit">Form Submit</button>
+      <button type="submit">Form Submit (GET)</button>
+    </form>
+    <form method="post" action="${testUrl}">
+      <button type="submit">Form Submit (POST)</button>
     </form>
     <script>
       function pushLocation() {
-        window.location.href = '${testUrl}';
+        window.setTimeout(() => {
+          window.location.href = '${testUrl}';
+        }, 1000);
       }
     </script>
     <button onclick="pushLocation()">Location href</button>
