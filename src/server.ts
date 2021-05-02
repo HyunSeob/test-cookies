@@ -1,9 +1,11 @@
 import fastify from 'fastify'
 import fastifyCookie from 'fastify-cookie'
+import fastifyFormBody from 'fastify-formbody'
 
 const server = fastify({ logger: true })
 
 server.register(fastifyCookie)
+server.register(fastifyFormBody)
 
 server.get(`/`, async (request, reply) => {
   return reply
