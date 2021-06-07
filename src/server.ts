@@ -15,24 +15,30 @@ server.get(`/`, async (request, reply) => {
     .setCookie(`same-site-strict (secure)`, `yes`, {
       sameSite: `strict`,
       secure: true,
+      path: '/',
     })
     .setCookie(`same-site-lax (secure)`, `yes`, {
       sameSite: `lax`,
       secure: true,
+      path: '/',
     })
     .setCookie(`same-site-none (secure)`, `yes`, {
       sameSite: `none`,
       secure: true,
+      path: '/',
     })
     .setCookie(`same-site-strict (non-secure)`, `yes`, {
       sameSite: `strict`,
+      path: '/',
     })
     .setCookie(`same-site-lax (non-secure)`, `yes`, {
       sameSite: `lax`,
+      path: '/',
     })
     .setCookie(`same-site-none (non-secure)`, `yes`, {
       sameSite: `none`,
       secure: false,
+      path: '/',
     })
     .send(request.cookies)
 })
