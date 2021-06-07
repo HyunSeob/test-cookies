@@ -32,6 +32,37 @@ server.get(`/`, async (request, reply) => {
     })
     .setCookie(`same-site-none (non-secure)`, `yes`, {
       sameSite: `none`,
+      secure: false,
+    })
+    .send(request.cookies)
+})
+
+server.post(`/`, async (request, reply) => {
+  return reply
+    .setCookie(`normal`, `yes`)
+    .setCookie(`http-only`, `yes`, { httpOnly: true })
+    .setCookie(`secure`, `yes`, { secure: true })
+    .setCookie(`same-site-strict (secure)`, `yes`, {
+      sameSite: `strict`,
+      secure: true,
+    })
+    .setCookie(`same-site-lax (secure)`, `yes`, {
+      sameSite: `lax`,
+      secure: true,
+    })
+    .setCookie(`same-site-none (secure)`, `yes`, {
+      sameSite: `none`,
+      secure: true,
+    })
+    .setCookie(`same-site-strict (non-secure)`, `yes`, {
+      sameSite: `strict`,
+    })
+    .setCookie(`same-site-lax (non-secure)`, `yes`, {
+      sameSite: `lax`,
+    })
+    .setCookie(`same-site-none (non-secure)`, `yes`, {
+      sameSite: `none`,
+      secure: false,
     })
     .send(request.cookies)
 })
