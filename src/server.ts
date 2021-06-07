@@ -67,10 +67,6 @@ server.post(`/`, async (request, reply) => {
     .send(request.cookies)
 })
 
-server.post(`/`, async (request, reply) => {
-  return reply.send(request.cookies)
-})
-
 const testUrl = `https://seob-test-cookies.herokuapp.com/`
 
 server.get(`/redirect`, async (_, reply) => {
